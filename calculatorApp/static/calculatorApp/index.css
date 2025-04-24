@@ -1,0 +1,41 @@
+body {
+    text-align: center;
+    font-family: cursive;
+}
+
+h1 {
+    margin-top: 80px;
+    color: brown;
+}
+
+.inputContainers {
+    margin-top: 50px;
+    font-size: 24px;
+}
+
+.operationContainers {
+    margin-top: 20px;
+}
+
+.inputbutton {
+    height: 24px;
+}
+
+.inputNum2 {
+    margin-bottom: 20px;
+}
+
+.submitbutton {
+    font-size: 24px;
+    background-color: darkcyan;
+    color: white;
+}
+
+.operationbutton {
+    font-size:24px; margin: 20px; background-color: burlywood;
+}
+
+.operationbutton:hover {
+    cursor:pointer;
+    background-color: aqua; 
+}

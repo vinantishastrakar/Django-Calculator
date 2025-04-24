@@ -33,6 +33,7 @@ class Multiply(APIView):
             if num1 == 0 or num2 == 0:
                 return Response({"error : Numbers cannot be zero"}, status=status.HTTP_400_BAD_REQUEST)
             result = num1 * num2
+            return Response({'result' : result}, status=status.HTTP_200_OK)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
     
 class Divide(APIView):
@@ -44,10 +45,11 @@ class Divide(APIView):
             if num2 == 0 :
                 return Response({"error : Number cannot be zero"}, status=status.HTTP_400_BAD_REQUEST)
             result = num1 / num2
+            return Response({'result' : result}, status=status.HTTP_200_OK)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-
-
+def index(request):
+    return render(request=request, template_name = "calculatorApp/index.html", context={})
 
 
 

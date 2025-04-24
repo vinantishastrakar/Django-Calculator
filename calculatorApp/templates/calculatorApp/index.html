@@ -1,0 +1,123 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel = 'stylesheet' type = 'text/css' href = "{% static 'calculatorApp/index.css' %}">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Simple Calculator App</h1>
+    <div class = 'inputContainers'>
+        <form action = "">
+            <label for="inputNum1">Enter the first number</label>
+            <input type = 'number' id = 'inputNum1' class = 'inputa inputNum1'><br><br>
+            <label for="inputNum2">Enter the second number</label>
+            <input type = 'number' id = 'inputNum2' class = 'inputa inputNum2'><br><br>
+        </form>
+    </div>
+    <div class = 'operationContainers'>
+        <a class = 'operationbutton'>Add</a>
+        <a class = 'operationbutton'>Subtract</a>
+        <a class = 'operationbutton'>Multiply</a>
+        <a class = 'operationbutton'>Divide</a>
+    </div>
+    <div class = 'outputContainer'>
+        <p class = 'ansbox' id = "answerbox"></p>
+    </div>
+</body>
+<script src="index.js"></script>
+<script>
+    
+    document.getElementsByClassName("operationbutton")[0].addEventListener("click", addOperation);
+
+    function addOperation() {
+        let a = document.getElementById("inputNum1").value;
+        let b = document.getElementById("inputNum2").value;
+        const data = {"num1": a, "num2": b}
+
+        fetch("http://127.0.0.1:8000/add/", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(data),
+        }).then(
+            (response) => {
+                // console.log(response.json());
+                response.json().then((data) => {
+                    document.querySelector('.ansbox').innerHTML = '<h1>Result : </h1>' + data.result 
+                })
+            }
+        )
+    }
+
+    document.getElementsByClassName("operationbutton")[1].addEventListener("click", subtractOperation);
+
+    function subtractOperation() {
+        let a = document.getElementById("inputNum1").value;
+        let b = document.getElementById("inputNum2").value;
+        const data = {"num1": a, "num2": b}
+
+        fetch("http://127.0.0.1:8000/subtract/", {
+            method: "POST", 
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(data),
+        }).then(
+            (response) => {
+                response.json().then((data) => {
+                    document.querySelector('.ansbox').innerHTML = '<h1>Result : </h1>' + data.result
+                })
+            }
+        )
+    }
+
+    document.getElementsByClassName("operationbutton")[2].addEventListener("click", multiplyOperation);
+
+    function multiplyOperation() {
+        let a = document.getElementById("inputNum1").value;
+        let b = document.getElementById("inputNum2").value;
+        const data = {"num1": a, "num2": b}
+
+        fetch("http://127.0.0.1:8000/multiply/", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(data),
+        }).then(
+            response => {
+                response.json().then((data) => {
+                    document.getElementsByClassName('ansbox')[0].innerHTML = '<h1>Result : </h1>' + data.result
+                })
+            }
+        )
+    }
+
+    document.getElementsByClassName("operationbutton")[3].addEventListener("click", divideOperation);
+
+    function divideOperation() {
+        let a = document.getElementById("inputNum1").value;
+        let b = document.getElementById("inputNum2").value;
+        const data = {"num1": a, "num2": b}
+
+        fetch("http://127.0.0.1:8000/divide/", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(data),
+        }).then(
+            response => {
+                response.json().then((data) => {
+                    document.getElementById('answerbox').innerHTML = '<h1>Result : </h1>' + data.result
+                })
+            }
+        )
+    }
+</script>
+</html>
